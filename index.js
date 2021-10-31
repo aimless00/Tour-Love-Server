@@ -70,6 +70,20 @@ async function run() {
             res.send(result)
         });
 
+        //update 
+        app.put('/orders/:id', async (req, res) => {
+            const id = req.params.id;
+            const updateOrder = req.body;
+            const result = orderCollection.updateOne({ _id: Objectid(id) }, {
+                $set: {
+                    status: updateOrder.status
+                }
+            })
+            res.send(result)
+            console.log(id, updateOrder, result);
+        })
+
+
     }
     finally {
         // await client.close();
